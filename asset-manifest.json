@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/lomatt.github.io/hexOcean/static/css/main.0003b565.css",
-    "main.js": "/lomatt.github.io/hexOcean/static/js/main.777c2c78.js",
-    "static/js/787.df9b92a2.chunk.js": "/lomatt.github.io/hexOcean/static/js/787.df9b92a2.chunk.js",
-    "index.html": "/lomatt.github.io/hexOcean/index.html",
-    "main.0003b565.css.map": "/lomatt.github.io/hexOcean/static/css/main.0003b565.css.map",
-    "main.777c2c78.js.map": "/lomatt.github.io/hexOcean/static/js/main.777c2c78.js.map",
-    "787.df9b92a2.chunk.js.map": "/lomatt.github.io/hexOcean/static/js/787.df9b92a2.chunk.js.map"
+    "main.css": "/hex-ocean/static/css/main.0003b565.css",
+    "main.js": "/hex-ocean/static/js/main.534bbfa4.js",
+    "static/js/787.df9b92a2.chunk.js": "/hex-ocean/static/js/787.df9b92a2.chunk.js",
+    "index.html": "/hex-ocean/index.html",
+    "main.0003b565.css.map": "/hex-ocean/static/css/main.0003b565.css.map",
+    "main.534bbfa4.js.map": "/hex-ocean/static/js/main.534bbfa4.js.map",
+    "787.df9b92a2.chunk.js.map": "/hex-ocean/static/js/787.df9b92a2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0003b565.css",
-    "static/js/main.777c2c78.js"
+    "static/js/main.534bbfa4.js"
   ]
 }
