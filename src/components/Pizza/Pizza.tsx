@@ -41,6 +41,7 @@ const Pizza = ({
           />
         )}
       </Field>  
+      <br />
 
       <label htmlFor="">Diameter: </label>
       <Field name="diameterOfPizza">
