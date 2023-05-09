@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Field } from "react-final-form";
 
 const Soup = ({
@@ -10,7 +9,7 @@ const Soup = ({
 }) => {
 
   const changeField = (event: any) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setSpicyValue(event.target.value);
   };
 

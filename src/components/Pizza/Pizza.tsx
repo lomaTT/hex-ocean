@@ -13,13 +13,13 @@ const Pizza = ({
 }) => {
     const changeSlicesOfPizza = (event: any) => {
         // console.log(event.target.value);
-        if (event.target.value < 0) event.target.value = 0;
+        if (event.target.value % 1 === 0) event.target.value = Math.round(event.target.value);
         setSlicesOfPizzaValue(event.target.value);
       };
 
     const changeDiameterOfPizza = (event: any) => {
         // console.log(event.target.value);
-        if (event.target.value < 0) event.target.value = 0;
+        if (event.target.value < 0.1) event.target.value = 1.0;
         setDiameterValue(event.target.value);
       };
   return (

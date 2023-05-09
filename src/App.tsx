@@ -5,25 +5,75 @@ import { Field, Form } from "react-final-form";
 import Pizza from "./components/Pizza/Pizza";
 import Soup from "./components/Soup/Soup";
 import Sandwich from "./components/Sandwich/Sandwich";
+import axios from 'axios';
 
 const sleep = (ms: number | undefined) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-const onSubmit = async (values: any) => {
-  await sleep(300);
-  window.alert(JSON.stringify(values));
-  // window.alert(JSON.stringify(values.dishType));
-};
 
 function App() {
   const [spicyValue, setSpicyValue] = useState(1);
   const [slicesOfBreadValue, setSlicesOfBreadValue] = useState(2);
   const [slicesOfPizzaValue, setSlicesOfPizzaValue] = useState(1);
   const [diameterValue, setDiameterValue] = useState(1.0);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const onSubmit = async (values: any) => {
+    await sleep(300);
+    
+    // window.alert(JSON.stringify(values));
+    validate(values);
+  };
+
+  const validate = async (values: any) => {
+    var article = {};
+    // console.log(values.dishType);
+    if (values.dishName && values.dishType !== 'none' && values.dishType !== undefined && values.prepTime !== undefined
+        && JSON.stringify(values.prepTime.match(/^(?:2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$/)) !== 'null' ) {
+        await sleep(500);
+        switch (values.dishType) {
+            case "Pizza":
+                article = { 
+                    "name": values.dishName, 
+                    "preparation_time": values.prepTime, 
+                    "type": "pizza", 
+                    "no_of_slices": slicesOfPizzaValue, 
+                    "diameter": diameterValue 
+                };
+                break;
+            case "Soup":
+                article = { 
+                    "name": values.dishName, 
+                    "preparation_time": values.prepTime, 
+                    "type": "soup", 
+                    "spiciness_scale": spicyValue
+                };
+                break;
+            case "Sandwich":
+                article = { 
+                    "name": values.dishName, 
+                    "preparation_time": values.prepTime, 
+                    "type": "sandwich", 
+                    "slices_of_bread": slicesOfBreadValue
+                };
+                break;
+        }
+        const response = await axios.post('https://umzzcc503l.execute-api.us-west-2.amazonaws.com/dishes/', article);
+        setErrorMessage("");
+        console.log(response.data);
+    } else {
+        setErrorMessage("Please, fill form correctly!");
+    }
+    
+        // const article = { "name": "HexOceanPizza", "preparation_time": "01:30:22", "type": "pizza", "no_of_slices": 4, "diameter": 33.4 };
+        // const response = await axios.post('https://umzzcc503l.execute-api.us-west-2.amazonaws.com/dishes/', article);
+        // console.log(response.data);
+        // if not null - valid
+  }
 
   return (
     <div className="min-w-screen min-h-screen flex items-center bg-teal-900 justify-center">
-      <div className="h-full text-white justify-center align-center text-center max-width-350px w-min rounded border-solid border-2 p-20 mt-10 mb-10">
+      <div className="h-full text-white justify-center align-center text-center max-width-350px max-h-screen w-min rounded border-solid border-2 p-20 mt-10 mb-10 pt-5 pb-5">
         <Form
           onSubmit={onSubmit}
           initialValues={{}}
@@ -34,7 +84,7 @@ function App() {
                 name="dishName"
                 component="input"
                 type="text"
-                placeholder="Dish Name"
+                placeholder="enter a dish name"
                 className="text-white rounded bg-black text-center"
               />
               <br />
@@ -44,7 +94,7 @@ function App() {
                 name="prepTime"
                 component="input"
                 type="text"
-                placeholder="HH:MM:SS"
+                placeholder="hh:mm:ss"
                 className="text-white rounded bg-black text-center"
               />
 
@@ -103,6 +153,8 @@ function App() {
             </form>
           )}
         />
+
+        {errorMessage ? <div className="errorMessage"> {errorMessage} </div> : <p></p>}
       </div>
     </div>
   );
